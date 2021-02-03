@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: mydiet
+  name: mydiet
+  namespace: fitness
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mydiet
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: mydiet
+    spec:
+      containers:
+      - image: kube-01.bd.com:5000/fitness/mydiet:0.1
+        name: mydiet
+        resources: {}
+status: {}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  creationTimestamp: null
+  labels:
+    app: mydiet
+  name: mydiet
+  namespace: fitness
+spec:
+  ports:
+  - name: 8080-8080
+    port: 8080
+    protocol: TCP
+    targetPort: 8080
+  selector:
+    app: mydiet
+  type: ClusterIP
+status:
+  loadBalancer: {}
