@@ -11,4 +11,7 @@ public interface FitnessMemberService {
 	Result findFsMemberByName(String name, String txid) throws Byung8Exception;
 	Result findFsMemberById(int id, String txid) throws Byung8Exception;
 	Result findFsMemberList(SearchOption searchOption, String txid) throws Byung8Exception;
+	Result modifyFsMember(FitnessMember fitnessMember, String txid) throws Byung8Exception;
+	Result modifyFsMemberNotUsed(FitnessMember fitnessMember, String txid) throws Byung8Exception;
+	Result modifyFsMemberAvailable(FitnessMember fitnessMember, String txid) throws Byung8Exception;
 }

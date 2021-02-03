@@ -8,7 +8,7 @@
 		  a.PRM_ID as paramId
 		, a.PRM_NM as paramName
 		, a.PRM_NM_ENG as paramNameEng
-		, a.PRM_DTL as description
+		, a.FS_DTL as description
 		, a.PRM_VAL as paramVal
 		, a.AMT_UNT_ID as amountUnitId
 		, (SELECT b.CD_NM FROM TB_CMM_CD b WHERE a.AMT_UNT_ID=b.CD_ID AND b.GRP_VAL='05') as amountUnitName
@@ -26,7 +26,7 @@
 		  a.PRM_ID as paramId
 		, a.PRM_NM as paramName
 		, a.PRM_NM_ENG as paramNameEng
-		, a.PRM_DTL as description
+		, a.FS_DTL as description
 		, a.PRM_VAL as paramVal
 		, a.AMT_UNT_ID as amountUnitId
 		, (SELECT b.CD_NM FROM TB_CMM_CD b WHERE a.AMT_UNT_ID=b.CD_ID AND b.GRP_VAL='05') as amountUnitName
@@ -43,7 +43,7 @@
 		  a.PRM_ID as paramId
 		, a.PRM_NM as paramName
 		, a.PRM_NM_ENG as paramNameEng
-		, a.PRM_DTL as description
+		, a.FS_DTL as description
 		, a.PRM_VAL as paramVal
 		, a.AMT_UNT_ID as amountUnitId
 		, (SELECT b.CD_NM FROM TB_CMM_CD b WHERE a.AMT_UNT_ID=b.CD_ID AND b.GRP_VAL='05') as amountUnitName
@@ -60,10 +60,11 @@
 		INSERT INTO TB_EXC_PARM (
 		  PRM_NM
 		, PRM_NM_ENG
-		, PRM_DTL
+		, FS_DTL
 		, PRM_VAL
 		, AMT_UNT_ID
 		, ANT_UNT_VAL
+		, UDP_DT
 		) VALUES (
 		  #{paramName}
 		, #{paramNameEng}
@@ -71,6 +72,29 @@
 		, #{paramVal}
 		, #{amountUnitId}
 		, #{amountUnitVal}
+		, NULL
 		)
 	</insert>
+
+	<update id="updateExerciseParam" parameterType="com.byung8.mydiet.domain.ExerciseParam">
+		UPDATE TB_EXC_PARM
+		SET PRM_NM_ENG=${paramNameEng}
+		, PRM_NM=${paramName}
+		, FS_DTL=${description}
+		, PRM_VAL=${PRM_VAL}
+		WHERE
+		PRM_ID=${paramId}
+	</update>
+
+	<update id="updateExerciseParamNotUsed" parameterType="com.byung8.mydiet.domain.ExerciseParam">
+		UPDATE TB_EXC_PARM
+		SET PRM_NM_ENG=${paramNameEng}
+		, PRM_NM=${paramName}
+		, FS_DTL=${description}
+		, PRM_VAL=${PRM_VAL}
+		, USE_YN='N'
+		WHERE
+		PRM_ID=${paramId}
+		AND USE_YN='Y'
+	</update>
 </mapper>

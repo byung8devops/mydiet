@@ -16,4 +16,7 @@ public interface FitnessMemberMapper {
 	List<FitnessMember> findFsMemberListByEmail(String email) throws SQLException;
 	List<FitnessMember> findFsMemberListByName(String name) throws SQLException;
 	List<FitnessMember> findFsMemberList() throws SQLException;
+	int updateFsMember(FitnessMember fitnessMember) throws SQLException;
+	int updateFsMemberNotUsed(FitnessMember fitnessMember) throws SQLException;
+	int updateFsMemberAvailable(FitnessMember fitnessMember) throws SQLException;
 }

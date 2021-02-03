@@ -18,7 +18,7 @@
 		 ,a.MBR_EMLADDR as email
 		 ,a.MBR_NM as name
 		 ,a.MBR_GNDR as genderId
-		 , (SELECT b.CD_NM FROM TB_CMM_CD b WHERE a.MBR_GNDR=b.CD_ID) as genderNm
+		 , (SELECT b.CD_NM FROM TB_CMM_CD b WHERE a.MBR_GNDR=b.CD_ID AND b.GRP_VAL='06') as genderNm
 		 ,a.BRTH_DAY as birthday
 		 ,a.HEIGHT as height
 		 ,a.USE_YN as useYn
@@ -35,7 +35,7 @@
 		 ,a.MBR_EMLADDR as email
 		 ,a.MBR_NM as name
 		 ,a.MBR_GNDR as genderId
-		 , (SELECT b.CD_NM FROM TB_CMM_CD b WHERE a.MBR_GNDR=b.CD_ID) as genderNm
+		 , (SELECT b.CD_NM FROM TB_CMM_CD b WHERE a.MBR_GNDR=b.CD_ID AND b.GRP_VAL='06') as genderNm
 		 ,a.BRTH_DAY as birthday
 		 ,a.HEIGHT as height
 		 ,a.USE_YN as useYn
@@ -52,7 +52,7 @@
 		 ,a.MBR_EMLADDR as email
 		 ,a.MBR_NM as name
 		 ,a.MBR_GNDR as genderId
-		 , (SELECT b.CD_NM FROM TB_CMM_CD b WHERE a.MBR_GNDR=b.CD_ID) as genderNm
+		 , (SELECT b.CD_NM FROM TB_CMM_CD b WHERE a.MBR_GNDR=b.CD_ID AND b.GRP_VAL='06') as genderNm
 		 ,a.BRTH_DAY as birthday
 		 ,a.HEIGHT as height
 		 ,a.USE_YN as useYn
@@ -69,7 +69,7 @@
 		 ,a.MBR_EMLADDR as email
 		 ,a.MBR_NM as name
 		 ,a.MBR_GNDR as genderId
-		 , (SELECT b.CD_NM FROM TB_CMM_CD b WHERE a.MBR_GNDR=b.CD_ID) as genderNm
+		 , (SELECT b.CD_NM FROM TB_CMM_CD b WHERE a.MBR_GNDR=b.CD_ID AND b.GRP_VAL='06') as genderNm
 		 ,a.BRTH_DAY as birthday
 		 ,a.HEIGHT as height
 		 ,a.USE_YN as useYn
@@ -86,7 +86,7 @@
 		 ,a.MBR_EMLADDR as email
 		 ,a.MBR_NM as name
 		 ,a.MBR_GNDR as genderId
-		 , (SELECT b.CD_NM FROM TB_CMM_CD b WHERE a.MBR_GNDR=b.CD_ID) as genderNm
+		 , (SELECT b.CD_NM FROM TB_CMM_CD b WHERE a.MBR_GNDR=b.CD_ID AND b.GRP_VAL='06') as genderNm
 		 ,a.BRTH_DAY as birthday
 		 ,a.HEIGHT as height
 		 ,a.USE_YN as useYn
@@ -103,7 +103,7 @@
 		 ,a.MBR_EMLADDR as email
 		 ,a.MBR_NM as name
 		 ,a.MBR_GNDR as genderId
-		 , (SELECT b.CD_NM FROM TB_CMM_CD b WHERE a.MBR_GNDR=b.CD_ID) as genderNm
+		 , (SELECT b.CD_NM FROM TB_CMM_CD b WHERE a.MBR_GNDR=b.CD_ID AND b.GRP_VAL='06') as genderNm
 		 ,a.BRTH_DAY as birthday
 		 ,a.HEIGHT as height
 		 ,a.USE_YN as useYn
@@ -113,4 +113,24 @@
 		WHERE a.USE_YN='Y'
 	</select>
 	
+	<update id="updateFsMember" parameterType="com.byung8.mydiet.domain.FitnessMember">
+		UPDATE TB_FS_MEMBER
+		SET MBR_EMLADDR=${email}
+		, BRTH_DAY=${birthday}
+		, HEIGHT=${height}
+		WHERE MBR_ID=${memberId}
+	</update>
+
+	<update id="updateFsMemberNotUsed" parameterType="com.byung8.mydiet.domain.FitnessMember">
+		UPDATE TB_FS_MEMBER
+		SET USE_YN='N'
+		WHERE MBR_ID=${memberId}
+	</update>
+
+	<update id="updateFsMemberAvailable" parameterType="com.byung8.mydiet.domain.FitnessMember">
+		UPDATE TB_FS_MEMBER
+		SET USE_YN='Y'
+		WHERE MBR_ID=${memberId}
+		AND USE_YN='N'
+	</update>
 </mapper>

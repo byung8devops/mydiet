@@ -31,7 +31,7 @@ import lombok.extern.slf4j.Slf4j;
  */
 @RestController
 @Slf4j
-@RequestMapping(value = "/api/v1/fitness")
+@RequestMapping(value = "/fitness")
 public class FitnessController {
 
 	@Autowired

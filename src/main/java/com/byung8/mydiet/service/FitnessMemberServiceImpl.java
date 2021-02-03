@@ -107,4 +107,46 @@ public class FitnessMemberServiceImpl implements FitnessMemberService {
 		return result;
 	}
 
+	@Override
+	public Result modifyFsMember(FitnessMember fitnessMember, String txid) throws Byung8Exception {
+		Result result = null;
+		try {
+			int ret = fitnessMemberMapper.updateFsMember(fitnessMember);
+			
+			result = new Result(txid, Result.OK).putValue("modifyFsMember", ret > 0 ? true : false);
+		} catch(SQLException e) {
+			log.error("findFsMemberList", e);
+			throw new Byung8Exception(e);
+		}
+		return result;
+	}
+	
+	@Override
+	public Result modifyFsMemberNotUsed(FitnessMember fitnessMember, String txid) throws Byung8Exception{
+		Result result = null;
+		try {
+			int ret = fitnessMemberMapper.updateFsMemberNotUsed(fitnessMember);
+			
+			result = new Result(txid, Result.OK).putValue("modifyFsMemberNotUsed", ret > 0 ? true : false);
+		} catch(SQLException e) {
+			log.error("findFsMemberList", e);
+			throw new Byung8Exception(e);
+		}
+		return result;
+	}
+
+	@Override
+	public Result modifyFsMemberAvailable(FitnessMember fitnessMember, String txid) throws Byung8Exception{
+		Result result = null;
+		try {
+			int ret = fitnessMemberMapper.updateFsMemberAvailable(fitnessMember);
+			
+			result = new Result(txid, Result.OK).putValue("updateFsMemberAvailable", ret > 0 ? true : false);
+		} catch(SQLException e) {
+			log.error("findFsMemberList", e);
+			throw new Byung8Exception(e);
+		}
+		return result;
+	}
+
 }

@@ -78,4 +78,30 @@ public class ExerciseServiceImpl implements ExerciseService {
 		}
 		return result;
 	}
+	
+	@Override
+	public Result modifyExerciseParam(ExerciseParam exerciseParam, String txid) throws Byung8Exception {
+		Result result = null;
+		try {
+			int ret = excParamMapper.updateExerciseParam(exerciseParam);
+			result = new Result(txid, Result.OK).putValue("modifyExerciseParam", exerciseParam);
+		} catch(SQLException e) {
+			log.error("exerciseParam", e);
+			throw new Byung8Exception(e);
+		}
+		return result;
+	}
+	
+	@Override
+	public Result modifyExerciseParamNotUsed(ExerciseParam exerciseParam, String txid) throws Byung8Exception {
+		Result result = null;
+		try {
+			int ret = excParamMapper.updateExerciseParamNotUsed(exerciseParam);
+			result = new Result(txid, Result.OK).putValue("exerciseParam", exerciseParam);
+		} catch(SQLException e) {
+			log.error("exerciseParam", e);
+			throw new Byung8Exception(e);
+		}
+		return result;
+	}
 }
