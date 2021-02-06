@@ -30,11 +30,12 @@ metadata:
   creationTimestamp: null
   labels:
     app: mydiet
+    release: fitness
   name: mydiet
   namespace: fitness
 spec:
   ports:
-  - name: 8080-8080
+  - name: http-svc
     port: 8080
     protocol: TCP
     targetPort: 8080
