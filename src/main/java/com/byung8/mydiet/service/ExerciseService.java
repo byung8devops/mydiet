@@ -11,6 +11,7 @@ public interface ExerciseService {
 	Result registerExercseParam(ExerciseParam exerciseParam, String txid) throws Byung8Exception;
 	Result getExcParamById(int paramId, String txid) throws Byung8Exception;
 	Result getExcParams(String exerciseName, String txid) throws Byung8Exception;
+	Result getExcAllParams(String txid) throws Byung8Exception;
 	Result modifyExerciseParam(ExerciseParam exerciseParam, String txid) throws Byung8Exception;
 	Result modifyExerciseParamNotUsed(ExerciseParam exerciseParam, String txid) throws Byung8Exception;
 }

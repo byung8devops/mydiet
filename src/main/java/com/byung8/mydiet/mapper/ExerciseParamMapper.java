@@ -13,6 +13,7 @@ public interface ExerciseParamMapper {
 	ExerciseParam findExerciseParamById(int paramId) throws SQLException;
 	List<ExerciseParam> findExerciseParamsByName(String paramName) throws SQLException;
 	List<ExerciseParam> findExerciseAll() throws SQLException;
+	List<ExerciseParam> findExerciseAllParams() throws SQLException;
 	int updateExerciseParam(ExerciseParam exerciseParam) throws SQLException;
 	int updateExerciseParamNotUsed(ExerciseParam exerciseParam) throws SQLException;
 }

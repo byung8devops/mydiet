@@ -235,4 +235,25 @@ public class FitnessController {
 		}
 	}
 
+
+	@RequestMapping(value = "/exercise/allparams", method = RequestMethod.GET)
+	public ResponseEntity<String> getExcAllParams() {
+
+		String txid = txId();
+		try {
+			Result result = exerciseService.getExcAllParams(txid);
+			return new ResponseEntity<String>(result.toJson(), result.status());
+		} catch (Exception e) {
+			log.error("Failed to fetch ExcParamList", e);
+			if (e instanceof NullPointerException) {
+				return new ResponseEntity<String>(HttpStatus.EXPECTATION_FAILED);
+			} else if (e instanceof Byung8Exception) {
+				Result result = new Result(txid, IResult.ERROR, "").putValue("error", e.getMessage());
+				return new ResponseEntity<String>(result.toJson(), HttpStatus.EXPECTATION_FAILED);
+			} else {
+				Result result = new Result(txid, IResult.ERROR, "").putValue("error", e);
+				return new ResponseEntity<String>(result.toJson(), HttpStatus.EXPECTATION_FAILED);
+			}
+		}
+	}
 }

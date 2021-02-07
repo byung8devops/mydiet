@@ -56,6 +56,23 @@
 		AND a.PRM_ID = ${value}
 	</select>
 	
+	<select id="findExerciseAllParams" resultType="com.byung8.mydiet.domain.ExerciseParam">
+		SELECT
+		  a.PRM_ID as paramId
+		, a.PRM_NM as paramName
+		, a.PRM_NM_ENG as paramNameEng
+		, a.FS_DTL as description
+		, a.PRM_VAL as paramVal
+		, a.AMT_UNT_ID as amountUnitId
+		, (SELECT b.CD_NM FROM TB_CMM_CD b WHERE a.AMT_UNT_ID=b.CD_ID AND b.GRP_VAL='05') as amountUnitName
+		, a.ANT_UNT_VAL amountUnitVal
+		, a.USE_YN as useYn
+		, a.REG_DT as regDt
+		, a.UDP_DT as udpDt
+		FROM TB_EXC_PARM a
+		WHERE a.USE_YN='Y'
+	</select>
+	
 	<insert id="registerExerciseParam" parameterType="com.byung8.mydiet.domain.ExerciseParam" >
 		INSERT INTO TB_EXC_PARM (
 		  PRM_NM

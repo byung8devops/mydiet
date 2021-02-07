@@ -80,6 +80,19 @@ public class ExerciseServiceImpl implements ExerciseService {
 	}
 	
 	@Override
+	public Result getExcAllParams(String txid) throws Byung8Exception {
+		Result result = null;
+		try {
+			List<ExerciseParam> list = excParamMapper.findExerciseAll();
+			result = new Result(txid, Result.OK).putValue("findExerciseAll", list);
+		} catch(SQLException e) {
+			log.error("exerciseParam", e);
+			throw new Byung8Exception(e);
+		}
+		return result;
+	}
+
+	@Override
 	public Result modifyExerciseParam(ExerciseParam exerciseParam, String txid) throws Byung8Exception {
 		Result result = null;
 		try {
